@@ -1,11 +1,17 @@
 #!/bin/bash
 
-# Deploy Dean Auto WordPress theme to the live server
-# Usage (from your LOCAL machine):
-#   ./deploy-wordpress.sh [server-ip-or-hostname]
+# Deploy the Dean Auto WordPress theme (wordpress/deanauto/) to a remote host.
 #
-# Example:
+# Current production:
 #   ./deploy-wordpress.sh 44.203.181.228
+#
+# Redeploy / new host example:
+#   export SSH_KEY=~/Downloads/new-host.pem
+#   export SERVER_USER=ubuntu
+#   export REMOTE_PATH=/var/www/html/wp-content/themes/deanauto
+#   ./deploy-wordpress.sh NEW_SERVER_IP
+#
+# Full host-migration checklist: wordpress/README.md
 #
 # Optional env vars:
 #   SERVER_USER   (default: admin)

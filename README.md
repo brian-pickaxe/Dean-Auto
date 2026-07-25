@@ -105,6 +105,36 @@ Then point CSS/templates at that filename.
 
 ---
 
+## Redeploy to another host
+
+Moving the whole site to a **new VPS / Lightsail / shared host** is documented step-by-step here:
+
+**→ [wordpress/README.md](wordpress/README.md#redeploy-to-another-host-exact-steps)**
+
+That guide covers:
+
+1. Installing WordPress on the new server  
+2. Deploying the theme (`./deploy-wordpress.sh` or zip upload)  
+3. Settings, pages/templates, Pricing Packages, Yoast  
+4. SSL + DNS cutover  
+5. Optional full DB/media migration from the current host  
+6. Pointing future deploys at the new IP/user/key  
+
+Quick theme-only deploy to a new host:
+
+```bash
+export SSH_KEY=/path/to/new-host.pem
+export SERVER_USER=ubuntu          # or admin / bitnami
+export REMOTE_PATH=/var/www/html/wp-content/themes/deanauto
+./deploy-wordpress.sh NEW_SERVER_IP
+```
+
+Then activate **Dean Auto** under Appearance → Themes and finish the checklist in `wordpress/README.md`.
+
+> Note: [DEPLOYMENT.md](DEPLOYMENT.md) describes the **legacy Next.js static** Lightsail flow. The live site is WordPress — use `deploy-wordpress.sh` + `wordpress/README.md` for production.
+
+---
+
 ## Common updates (cheat sheet)
 
 ### Change the phone number
@@ -182,30 +212,27 @@ npm run build        # static export → out/
 ```
 DeanAuto/
 ├── wordpress/
-│   ├── README.md                 # Theme install & page templates
+│   ├── README.md                 # Theme + REDEPLOY TO NEW HOST guide
 │   └── deanauto/                 # LIVE WordPress theme
 │       ├── functions.php         # Phone, booking URL, SEO, schema, pricing CPT
 │       ├── style.css
 │       ├── header.php / footer.php
 │       ├── front-page.php
-│       ├── page-pricing.php
-│       ├── page-contact.php
-│       ├── page-about.php
-│       ├── page-interior.php
-│       ├── page-exterior.php
-│       ├── page-ceramic-coating.php
-│       ├── page-service-area.php # Westminster / Brighton / North Denver
+│       ├── page-*.php            # Pricing, contact, services, city pages
 │       └── images/
 ├── app/                          # Next.js pages (reference)
 ├── components/                   # Next.js components
 ├── public/images/                # Next.js static images
-├── deploy-wordpress.sh           # Deploy theme → 44.203.181.228
-└── deploy.sh                     # Legacy Next.js static deploy (not primary)
+├── deploy-wordpress.sh           # Deploy theme via SSH (any host)
+├── DEPLOYMENT.md                 # Legacy Next.js static deploy (not live site)
+└── deploy.sh                     # Legacy Next.js static deploy script
 ```
 
 ---
 
-## Server & access
+## Server & access (current production)
+
+Update this table when you move hosts.
 
 | Item | Value |
 |------|--------|
@@ -214,6 +241,7 @@ DeanAuto/
 | Server IP | `44.203.181.228` |
 | SSH | `admin@44.203.181.228` with `~/Downloads/Lionheart.pem` |
 | Theme path | `/var/www/html/wp-content/themes/deanauto` |
+| Redeploy docs | [wordpress/README.md](wordpress/README.md#redeploy-to-another-host-exact-steps) |
 
 ---
 

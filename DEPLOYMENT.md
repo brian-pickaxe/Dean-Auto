@@ -1,6 +1,17 @@
-# Deployment Guide for AWS Lightsail
+# Deployment Guide for AWS Lightsail (legacy Next.js static)
 
-This guide will help you deploy the Dean Auto website to an AWS Lightsail instance.
+> **The live site at [deanauto.net](https://deanauto.net) is WordPress.**  
+> To deploy or move that site, use:
+>
+> - [wordpress/README.md](wordpress/README.md) — full install / **redeploy to another host**  
+> - `./deploy-wordpress.sh NEW_SERVER_IP` — push the theme over SSH  
+> - Root [README.md](README.md) — day-to-day updates  
+>
+> This file documents the older **Next.js static export** (`deploy.sh` → nginx) flow and is kept for reference only.
+
+---
+
+This guide will help you deploy the **Next.js static** Dean Auto site to an AWS Lightsail instance.
 
 ## Prerequisites
 
