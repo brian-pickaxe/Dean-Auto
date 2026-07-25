@@ -1,0 +1,121 @@
+#!/bin/bash
+
+# Script to add V2 site support to existing nginx config
+# Run this ON your server
+
+set -e
+
+echo "🔧 Adding V2 site support to nginx..."
+
+# Backup current config
+sudo cp /etc/nginx/sites-available/deanauto /etc/nginx/sites-available/deanauto.backup.$(date +%Y%m%d_%H%M%S)
+echo "✅ Backup created"
+
+# Check if V2 directory exists
+if [ ! -d "/var/www/deanauto-v2" ]; then
+    echo "⚠️  Warning: /var/www/deanauto-v2 not found"
+    echo "   Deploy V2 site first: ./deploy-v2.sh 98.81.72.23"
+fi
+
+# Read current config and add V2 location
+echo "📝 Updating nginx configuration..."
+
+# Create updated config with V2 support
+sudo tee /etc/nginx/sites-available/deanauto > /dev/null << 'EOF'
+# HTTP - Redirect to HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name deanauto.net www.deanauto.net;
+
+    # Redirect all HTTP to HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+# HTTPS - Main site
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name deanauto.net www.deanauto.net;
+
+    root /var/www/deanauto;
+    index index.html;
+
+    # SSL certificates
+    ssl_certificate /etc/letsencrypt/live/deanauto.net/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/deanauto.net/privkey.pem;
+    
+    # SSL configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    # Gzip compression
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/xml+rss application/json;
+
+    # Security headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    # Main location
+    location / {
+        try_files $uri $uri/ $uri.html /index.html;
+    }
+
+    # V2 site on /v2 path (Adam's Polishes version)
+    location /v2 {
+        alias /var/www/deanauto-v2;
+        index index.html;
+        try_files $uri $uri/ $uri.html /v2/index.html;
+    }
+
+    # Cache static assets
+    location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2|ttf|eot)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # Handle Next.js static files for main site
+    location /_next/static {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # Handle Next.js static files for V2 site
+    location /v2/_next/static {
+        alias /var/www/deanauto-v2/_next/static;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # 404 handling
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
+}
+EOF
+
+echo "🧪 Testing nginx configuration..."
+sudo nginx -t
+
+if [ $? -eq 0 ]; then
+    echo "✅ Configuration is valid"
+    echo "🔄 Reloading nginx..."
+    sudo systemctl reload nginx
+    echo "✅ V2 site support added!"
+    echo "🌐 V2 site should now be available at: https://deanauto.net/v2"
+else
+    echo "❌ Configuration test failed!"
+    echo "Restoring backup..."
+    sudo cp /etc/nginx/sites-available/deanauto.backup.* /etc/nginx/sites-available/deanauto
+    exit 1
+fi
+
