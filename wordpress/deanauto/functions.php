@@ -39,7 +39,7 @@ function deanauto_register_page_templates( $templates ) {
 add_filter( 'theme_page_templates', 'deanauto_register_page_templates' );
 
 function deanauto_scripts() {
-	wp_enqueue_style( 'deanauto-style', get_stylesheet_uri(), array(), '1.3.1' );
+	wp_enqueue_style( 'deanauto-style', get_stylesheet_uri(), array(), '1.3.3' );
 	// Setmore booking script (loaded on all pages for Book Now button)
 	wp_enqueue_script(
 		'setmore-booking',
@@ -237,14 +237,20 @@ function deanauto_output_local_business_schema() {
 			array(
 				'@type'     => 'OpeningHoursSpecification',
 				'dayOfWeek' => array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ),
-				'opens'     => '08:00',
-				'closes'    => '18:00',
+				'opens'     => '15:00',
+				'closes'    => '20:30',
 			),
 			array(
 				'@type'     => 'OpeningHoursSpecification',
 				'dayOfWeek' => 'Saturday',
-				'opens'     => '09:00',
-				'closes'    => '17:00',
+				'opens'     => '06:00',
+				'closes'    => '20:30',
+			),
+			array(
+				'@type'     => 'OpeningHoursSpecification',
+				'dayOfWeek' => 'Sunday',
+				'opens'     => '06:00',
+				'closes'    => '18:00',
 			),
 		),
 		'hasOfferCatalog' => array(
@@ -444,13 +450,13 @@ add_action( 'add_meta_boxes', 'deanauto_package_meta_boxes' );
 function deanauto_package_card_image( $title ) {
 	$map = array(
 		'Interior'         => 'interior-glistening-dash.jpg',
-		'Exterior'         => 'gallery-1.jpg',
-		'Full Detail'      => 'gallery-4.jpg',
-		'Polish'           => 'gallery-5.jpg',
+		'Exterior'         => 'work-1.jpg',
+		'Full Detail'      => 'work-4.jpg',
+		'Polish'           => 'work-5.jpg',
 		'Ceramic Coating'  => 'product-adams-graphene.jpg',
 	);
 	$key = trim( (string) $title );
-	$file = isset( $map[ $key ] ) ? $map[ $key ] : 'gallery-2.jpg';
+	$file = isset( $map[ $key ] ) ? $map[ $key ] : 'work-13.jpg';
 	$path = get_template_directory() . '/images/' . $file;
 	if ( ! file_exists( $path ) ) {
 		return '';

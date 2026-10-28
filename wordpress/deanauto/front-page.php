@@ -147,25 +147,31 @@ $tel      = deanauto_phone_tel();
 <section class="bg-gray">
 	<div class="container">
 		<h2 class="section-title">Our Work</h2>
-		<p class="section-subtitle">Explore our stunning transformations and see our detailing excellence.</p>
-		<p class="gallery-tip text-center"><strong>Tip:</strong> Replace these placeholder images with your own before/after photos in the theme images folder.</p>
+		<p class="section-subtitle">Real vehicles detailed by Dean Auto — interiors, exteriors, and paint that looks showroom-ready.</p>
 		<div class="gallery-grid">
 			<?php
-			$gallery_alts = array(
-				1 => 'Car after exterior wash and polish by Dean Auto mobile detailing in Thornton, Colorado',
-				2 => 'Vehicle exterior detailing result — premium wash and protection in Westminster and North Denver',
-				3 => 'Car interior after deep cleaning and sanitization — mobile interior detailing in North Denver suburbs',
-				4 => 'Professional hand wash and dry at your location — mobile car wash service by Dean Auto Detailers',
-				5 => 'Paint polishing and correction — premium detailing in Thornton and Westminster by Dean Auto',
-				6 => 'Graphene ceramic coating on car paint — long-lasting protection applied in North Denver',
+			$gallery_items = array(
+				1  => 'Lifted black pickup with American Force wheels after exterior detailing in Thornton, Colorado',
+				3  => 'Glossy Volkswagen side profile and wheel after paint polish and exterior detail',
+				4  => 'Pickup truck foam wash in progress during mobile exterior detailing',
+				5  => 'Close-up of mirror-finish metallic paint after polishing by Dean Auto',
+				6  => 'Classic BMW 6 Series coupe with lights on after full exterior detailing',
+				7  => 'Glossy black BMW 8 Series on driveway after professional detailing',
+				8  => 'Pair of classic BMW coupes detailed for a show and Navy aircraft backdrop',
+				9  => 'Dark gray Ram 1500 side profile after exterior wash and protection',
+				10 => 'Black Audi Q5 front three-quarter after mobile detailing in North Denver',
+				11 => 'Ford F-150 hood with clear coat failure before paint correction',
+				12 => 'Ram 1500 front view after exterior detailing and finish work',
+				13 => 'Black leather rear bench seats after deep interior cleaning',
+				14 => 'Black Tesla Model Y rear three-quarter after exterior detailing',
+				15 => 'Volkswagen Jetta GLI at night after exterior detailing and polish',
 			);
-			for ( $i = 1; $i <= 6; $i++ ) :
-				$alt = isset( $gallery_alts[ $i ] ) ? $gallery_alts[ $i ] : 'Mobile car detailing before and after in Thornton CO';
+			foreach ( $gallery_items as $i => $alt ) :
 			?>
 			<div class="gallery-item">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/images/gallery-' . $i . '.jpg' ); ?>" alt="<?php echo esc_attr( $alt ); ?>" loading="lazy" />
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/images/work-' . $i . '.jpg' ); ?>" alt="<?php echo esc_attr( $alt ); ?>" loading="lazy" />
 			</div>
-			<?php endfor; ?>
+			<?php endforeach; ?>
 		</div>
 	</div>
 </section>

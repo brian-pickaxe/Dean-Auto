@@ -25,7 +25,7 @@ const pricingPlans = [
     price: "From $100",
     description: "Hand wash, wheels, and exterior finish",
     note: "",
-    image: "/images/gallery-1.jpg",
+    image: "/images/work-1.jpg",
     features: [
       "Hand wash and dry",
       "Wheel and tire cleaning",
@@ -39,7 +39,7 @@ const pricingPlans = [
     price: "From $180",
     description: "Interior and exterior combined",
     note: "",
-    image: "/images/gallery-4.jpg",
+    image: "/images/work-4.jpg",
     features: [
       "Full interior detailing",
       "Full exterior detailing",
@@ -52,7 +52,7 @@ const pricingPlans = [
     price: "From $150",
     description: "Paint correction and polish",
     note: "Price varies based on paint condition.",
-    image: "/images/gallery-5.jpg",
+    image: "/images/work-5.jpg",
     features: [
       "Paint correction",
       "Machine polish",

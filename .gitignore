@@ -50,3 +50,6 @@ ubuntu@*
 .wp-chunks/
 .wp-theme-payload.json
 
+
+# local python deps
+.pydeps/

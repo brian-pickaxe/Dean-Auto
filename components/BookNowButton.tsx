@@ -40,12 +40,17 @@ export default function BookNowButton({
       "bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-xl",
   };
 
+  // Always link to Setmore so booking works even if the iframe script is blocked.
+  // Setmore's script enhances elements with id="Setmore_button_iframe" into a popup.
   return (
     <a
       id="Setmore_button_iframe"
       href="https://deanautodetailers.setmore.com"
+      target="_blank"
+      rel="noopener noreferrer"
       className={`${baseClasses} ${variantClasses[variant]} ${className}`}
       style={{ float: "none" }}
+      data-booking="setmore"
     >
       {children}
     </a>

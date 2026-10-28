@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import BookNowButton from "@/components/BookNowButton";
 
 export default function ContactPage() {
   return (
@@ -17,10 +18,13 @@ export default function ContactPage() {
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               Contact Us
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
               Get in touch to schedule your appointment or ask any questions.
-              We're here to help!
+              We&apos;re here to help!
             </p>
+            <BookNowButton variant="primary" className="px-8 py-3 text-lg">
+              Book Online Now
+            </BookNowButton>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
@@ -93,29 +97,34 @@ export default function ContactPage() {
                   <Clock className="w-6 h-6 text-primary-600" />
                   <div>
                     <p className="font-semibold text-gray-900">Monday - Friday</p>
-                    <p className="text-gray-600">8:00 AM - 6:00 PM</p>
+                    <p className="text-gray-600">3:00 PM - 8:30 PM</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <Clock className="w-6 h-6 text-primary-600" />
                   <div>
                     <p className="font-semibold text-gray-900">Saturday</p>
-                    <p className="text-gray-600">9:00 AM - 5:00 PM</p>
+                    <p className="text-gray-600">6:00 AM - 8:30 PM</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <Clock className="w-6 h-6 text-primary-600" />
                   <div>
                     <p className="font-semibold text-gray-900">Sunday</p>
-                    <p className="text-gray-600">By Appointment</p>
+                    <p className="text-gray-600">6:00 AM - 6:00 PM</p>
                   </div>
                 </div>
               </div>
               <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 mb-4">
                   We offer flexible scheduling to accommodate your needs.
-                  Contact us to discuss custom appointment times.
+                  Call{" "}
+                  <a href="tel:+17205323072" className="text-primary-600 font-semibold">
+                    (720) 532-3072
+                  </a>{" "}
+                  or book online anytime.
                 </p>
+                <BookNowButton variant="primary">Schedule Appointment</BookNowButton>
               </div>
             </div>
           </motion.div>

@@ -160,13 +160,12 @@ a.external:hover { color: var(--primary-700); }
 .testimonial-card cite { font-weight: 600; color: var(--gray-900); font-style: normal; }
 
 /* Gallery */
-.gallery-grid { display: grid; gap: 1.5rem; }
+.gallery-grid { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
 @media (min-width: 640px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
 .gallery-item { aspect-ratio: 4/3; border-radius: .75rem; overflow: hidden; }
 .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
 .gallery-item:hover img { transform: scale(1.05); }
-.gallery-tip { font-size: .875rem; background: #fef3c7; border: 1px solid #fcd34d; color: #92400e; padding: .5rem 1rem; border-radius: .5rem; max-width: 36rem; margin: 0 auto 4rem; }
 
 /* Page hero (inner pages) */
 .page-hero { padding: 5rem 0; background: linear-gradient(135deg, var(--primary-600), var(--primary-800)); color: #fff; text-align: center; }

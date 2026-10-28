@@ -57,14 +57,20 @@ export default function StructuredData() {
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:00",
-        closes: "18:00",
+        opens: "15:00",
+        closes: "20:30",
       },
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: "Saturday",
-        opens: "09:00",
-        closes: "17:00",
+        opens: "06:00",
+        closes: "20:30",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Sunday",
+        opens: "06:00",
+        closes: "18:00",
       },
     ],
     hasOfferCatalog: {

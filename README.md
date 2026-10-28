@@ -4,18 +4,77 @@ Website for **Dean Auto Detailers** — mobile car detailing in Thornton, CO and
 
 **Live site:** [https://deanauto.net](https://deanauto.net)
 
-The production site runs on **WordPress**. This repo also includes a Next.js version used as a design/content reference.
-
 | Stack | Path | Role |
 |-------|------|------|
-| **WordPress theme (live)** | `wordpress/deanauto/` | What powers [deanauto.net](https://deanauto.net) |
-| Next.js (optional / reference) | `app/`, `components/` | Local preview & content parity |
+| **Next.js static site (GitHub Pages)** | `app/`, `components/`, `public/` | Production site hosted on GitHub |
+| WordPress theme (legacy) | `wordpress/deanauto/` | Previous host — keep as archive / fallback |
+
+**Booking:** All “Book Now” / “Schedule Appointment” buttons open **Setmore** (`https://deanautodetailers.setmore.com`) via the official Setmore script. That booking app does **not** depend on WordPress — it works on GitHub Pages.
 
 ---
 
-## How to update the live site
+## Host on GitHub Pages (leave WordPress)
 
-### Quick reference
+The site builds to a static `out/` folder (`output: "export"`). GitHub Actions deploys it on every push to `main`.
+
+### 1. Enable GitHub Pages on the repo
+
+1. Open https://github.com/brian-pickaxe/Dean-Auto/settings/pages  
+2. Under **Build and deployment → Source**, choose **GitHub Actions**  
+3. Push to `main` (or run the **Deploy to GitHub Pages** workflow manually)
+
+Workflow file: `.github/workflows/deploy-pages.yml`
+
+### 2. Point `deanauto.net` DNS at GitHub
+
+In your DNS provider (where the domain is registered), set:
+
+| Type | Name | Value |
+|------|------|--------|
+| **A** | `@` | `185.199.108.153` |
+| **A** | `@` | `185.199.109.153` |
+| **A** | `@` | `185.199.110.153` |
+| **A** | `@` | `185.199.111.153` |
+| **CNAME** | `www` | `brian-pickaxe.github.io` |
+
+`public/CNAME` already contains `deanauto.net` so GitHub serves the custom domain.
+
+After DNS propagates (often minutes, sometimes up to 48h):
+
+1. Repo **Settings → Pages → Custom domain** → confirm `deanauto.net`  
+2. Enable **Enforce HTTPS** once the certificate is ready  
+
+### 3. Cut over from WordPress
+
+1. Confirm https://brian-pickaxe.github.io/Dean-Auto/ **or** the custom domain loads and **Book Now** opens Setmore  
+2. Switch DNS as above (this is the live cutover)  
+3. Keep the old WordPress server running a few days as backup, then shut it down when satisfied  
+
+### 4. Day-to-day updates (after GitHub Pages is live)
+
+| What to change | Where | How it goes live |
+|----------------|-------|------------------|
+| Phone number | `components/Navbar.tsx`, `Footer.tsx`, `StructuredData.tsx`, contact/city pages | Push to `main` |
+| Book Now / Setmore URL | `components/BookNowButton.tsx` (+ `app/layout.tsx` script) | Push to `main` |
+| Homepage / gallery | `components/Hero.tsx`, `Gallery.tsx`, `public/images/work-*.jpg` | Push to `main` |
+| Pricing | `app/pricing/page.tsx` | Push to `main` |
+| Hours | `app/contact/page.tsx`, `components/StructuredData.tsx` | Push to `main` |
+| Services / city pages | `app/services/*`, `app/westminster`, `app/brighton`, `app/north-denver` | Push to `main` |
+
+```bash
+npm run dev          # local preview http://localhost:3000
+npm run build        # writes static site to out/
+git add -A && git commit -m "…" && git push
+# Actions builds + deploys automatically
+```
+
+---
+
+## Legacy: WordPress host updates
+
+> Only needed if you still run the old WordPress server before DNS cutover.
+
+### Quick reference (WordPress)
 
 | What you want to change | Where to edit | How it goes live |
 |-------------------------|---------------|------------------|

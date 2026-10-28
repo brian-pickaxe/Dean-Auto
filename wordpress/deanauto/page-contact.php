@@ -57,9 +57,9 @@ $tel   = deanauto_phone_tel();
 			<?php
 			$clock_icon = '<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>';
 			?>
-			<div class="hours-row"><span class="icon" style="display:inline-flex;align-items:center;justify-content:center;color:var(--primary-600);"><?php echo $clock_icon; ?></span><div><p style="font-weight: 600; color: var(--gray-900);">Monday - Friday</p><p style="color: var(--gray-600);">8:00 AM - 6:00 PM</p></div></div>
-			<div class="hours-row"><span class="icon" style="display:inline-flex;align-items:center;justify-content:center;color:var(--primary-600);"><?php echo $clock_icon; ?></span><div><p style="font-weight: 600; color: var(--gray-900);">Saturday</p><p style="color: var(--gray-600);">9:00 AM - 5:00 PM</p></div></div>
-			<div class="hours-row"><span class="icon" style="display:inline-flex;align-items:center;justify-content:center;color:var(--primary-600);"><?php echo $clock_icon; ?></span><div><p style="font-weight: 600; color: var(--gray-900);">Sunday</p><p style="color: var(--gray-600);">By Appointment</p></div></div>
+			<div class="hours-row"><span class="icon" style="display:inline-flex;align-items:center;justify-content:center;color:var(--primary-600);"><?php echo $clock_icon; ?></span><div><p style="font-weight: 600; color: var(--gray-900);">Monday - Friday</p><p style="color: var(--gray-600);">3:00 PM - 8:30 PM</p></div></div>
+			<div class="hours-row"><span class="icon" style="display:inline-flex;align-items:center;justify-content:center;color:var(--primary-600);"><?php echo $clock_icon; ?></span><div><p style="font-weight: 600; color: var(--gray-900);">Saturday</p><p style="color: var(--gray-600);">6:00 AM - 8:30 PM</p></div></div>
+			<div class="hours-row"><span class="icon" style="display:inline-flex;align-items:center;justify-content:center;color:var(--primary-600);"><?php echo $clock_icon; ?></span><div><p style="font-weight: 600; color: var(--gray-900);">Sunday</p><p style="color: var(--gray-600);">6:00 AM - 6:00 PM</p></div></div>
 			<div style="margin-top: 2rem; padding: 1rem; background: var(--gray-50); border-radius: 0.5rem;">
 				<p style="font-size: 0.875rem; color: var(--gray-600);">We offer flexible scheduling to accommodate your needs. Call <a href="tel:<?php echo esc_attr( $tel ); ?>"><?php echo esc_html( $phone ); ?></a> to discuss custom appointment times.</p>
 			</div>
